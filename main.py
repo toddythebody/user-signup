@@ -11,15 +11,19 @@ def validate(text):
             return False
     return True
 
+@app.route('/')
+def displayIndex():
+    return render_template('index.html')
+
 @app.route('/', methods=['POST'])
 def index():
-    userName = request.form("userName")
+    userName = request.form["userName"]
     nameError = ''
-    Pass = request.form("Pass")
+    Pass = request.form["Pass"]
     PassError = ''
-    rePass = request.form("rePass")
+    rePass = request.form["rePass"]
     rePassError = ''
-    email = request.form("email")
+    email = request.form["email"]
     emailError = ''
 
     if validate(userName) == False:
@@ -43,17 +47,15 @@ def index():
         emailError = "Email must be (3-20) characters with no spaces"
         Pass = ''
         rePass = ''
-
-    if "@" not in email and "." not in email:
+    elif "@" not in email and "." not in email:
         emailError = "Not a vaild email"
         Pass = ''
         rePass = ''
 
     if Pass == '' and rePass == '':
-        return render_template("/", userName=userName, nameError=nameError, PassError=PassError, rePassError=rePassError, email=email, emailError=emailError)
+        return render_template("index.html", userName=userName, nameError=nameError, PassError=PassError, rePassError=rePassError, email=email, emailError=emailError)
     else:
         return render_template("home.html", userName=userName)
 
-@app.route('/home')
-def home():
-    return render_template("home.html", userName=userName)
+
+app.run()

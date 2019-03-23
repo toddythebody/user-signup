@@ -4,11 +4,12 @@
 <form method="post">
   <label for="name">User Name: </label>
     <input id="name" type="text" value={{userName}} name="userName">
-  <label for="pass">Password: </label>
-    <input id="pass" type="password" value='' name="pass">
+    <p class="error">{{nameError}}</p>
+  <label for="Pass">Password: </label>
+    <input id="Pass" type="password" value={{Pass}} name="Pass">
   <label for="rePass">Confirm Password: </label>
-    <input id="rePass" type="password" value='' name="rePass">
+    <input id="rePass" type="password" value={{rePass}} name="rePass">
   <label for="email">E-mail: </label>
-    <input id="email" type="text" value='' name="email">
+    <input id="email" type="text" value={{eMail}} name="email">
   <input type="submit">
 {% endblock %}

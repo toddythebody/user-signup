@@ -28,31 +28,23 @@ def index():
 
     if validate(userName) == False:
         nameError = "User Name must be (3-20) characters with no spaces"
-        Pass = ''
-        rePass = ''
 
     if validate(Pass) == False:
         PassError = "Password must be (3-20) characters with no spaces"
-        Pass = ''
-        rePass = ''
 
     if rePass != Pass:
         rePassError = "Confirmation does not match"
-        Pass = ''
-        rePass = ''
 
     if len(email) == 0:
         pass
     elif validate(email) == False:
         emailError = "Email must be (3-20) characters with no spaces"
-        Pass = ''
-        rePass = ''
     elif "@" not in email and "." not in email:
         emailError = "Not a vaild email"
+
+    if nameError != '' or PassError != '' or rePassError != '' or emailError != '':
         Pass = ''
         rePass = ''
-
-    if Pass == '' and rePass == '':
         return render_template("index.html", userName=userName, nameError=nameError, PassError=PassError, rePassError=rePassError, email=email, emailError=emailError)
     else:
         return render_template("home.html", userName=userName)

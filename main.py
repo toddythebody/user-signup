@@ -53,5 +53,5 @@ def index():
     else:
         return render_template("home.html", title="Welcome!", userName=userName)
 
-
-app.run()
+if __name__ == "__main__":
+    app.run()

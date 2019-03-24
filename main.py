@@ -13,17 +13,17 @@ def validate(text):
 
 @app.route('/')
 def displayIndex():
-    return render_template('index.html')
+    return render_template('index.html', title="Sign-up")
 
 @app.route('/', methods=['POST'])
 def index():
     userName = request.form["userName"]
-    nameError = ''
     Pass = request.form["Pass"]
-    PassError = ''
     rePass = request.form["rePass"]
-    rePassError = ''
     email = request.form["email"]
+    nameError = ''
+    PassError = ''
+    rePassError = ''
     emailError = ''
     validEntry = True
 
@@ -44,14 +44,14 @@ def index():
     elif validate(email) == False:
         emailError = "Email must be (3-20) characters with no spaces"
         validEntry = False
-        if "@" not in email or "." not in email:
-            emailError = "Not a vaild email"
-            validEntry = False
+    elif "@" not in email or "." not in email:
+        emailError = "Not a vaild email"
+        validEntry = False
 
     if validEntry == False:
-        return render_template("index.html", userName=userName, nameError=nameError, PassError=PassError, rePassError=rePassError, email=email, emailError=emailError)
+        return render_template("index.html", title="Sign-up", userName=userName, nameError=nameError, PassError=PassError, rePassError=rePassError, email=email, emailError=emailError)
     else:
-        return render_template("home.html", userName=userName)
+        return render_template("home.html", title="Welcome!", userName=userName)
 
 
 app.run()

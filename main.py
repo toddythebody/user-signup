@@ -1,15 +1,8 @@
-from flask import Flask, redirect, request, render_template
+from flask import Flask, request, render_template
+import re
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
-
-def validate(text):
-    if len(text) < 3 or len(text) > 20:
-        return False
-    for i in text:
-        if i == ' ':
-            return False
-    return True
 
 @app.route('/')
 def displayIndex():
@@ -27,11 +20,14 @@ def index():
     emailError = ''
     validEntry = True
 
-    if validate(userName) == False:
+    validString = re.compile(r'^[\S]{3,20}$')
+    validEmail = re.compile(r'^\w+@\w+\.\w+$')
+
+    if not validString.match(userName):
         nameError = "User Name must be (3-20) characters with no spaces"
         validEntry = False
 
-    if validate(Pass) == False:
+    if not validString.match(Pass):
         PassError = "Password must be (3-20) characters with no spaces"
         validEntry = False
 
@@ -41,10 +37,10 @@ def index():
 
     if len(email) == 0:
         pass
-    elif validate(email) == False:
+    elif not validString.match(email):
         emailError = "Email must be (3-20) characters with no spaces"
         validEntry = False
-    elif "@" not in email or "." not in email:
+    elif not validEmail.match(email):
         emailError = "Not a vaild email"
         validEntry = False
 

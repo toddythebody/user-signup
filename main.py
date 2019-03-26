@@ -21,7 +21,7 @@ def index():
     validEntry = True
 
     validString = re.compile(r'^[\S]{3,20}$')
-    validEmail = re.compile(r'^(?=\S{3,20}$)(?=[^@]*[@][^@]*$)(?=[^\.]*[\.][^\.]*$)')
+    validEmail = re.compile(r'^(?=\S{3,20}$)(?=[^@]*[@][^@]*$)(?=[^\.]*[\.][^\.]*$)(?=\w+@\w+\.\w+$)')
 
     if not validString.match(userName):
         nameError = "User Name must be (3-20) characters with no spaces"
